@@ -13,7 +13,7 @@ const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
-  const [showType, setShowType] = useState("");
+  const [showType, setShowType] = useState("table");
 
   const openModal = (book) => {
     setSelectedBook(book);
@@ -23,7 +23,7 @@ const Home = () => {
     setSelectedBook(null);
   };
 
-  useEffect(() => {
+  const getBooks = () => {
     setLoading(true);
     axios
       .get("http://localhost:5555/books")
@@ -36,6 +36,10 @@ const Home = () => {
       });
 
     setLoading(false);
+  };
+
+  useEffect(() => {
+    getBooks();
   }, []);
 
   return (
